@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aceptar Cookies</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('image.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+    }
+
+    .card h2 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 1.6rem;
+    }
+
+    .card p {
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .btn-verde {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 60px;
+      background: #28a745;
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+      transition: all 0.3s ease;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-verde:hover:not(:disabled) {
+      background: #218838;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    }
+
+    .btn-verde:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-verde:disabled {
+      background: #6c757d;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* Spinner de carga */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #ffffff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: girar 0.8s linear infinite;
+      display: none;
+    }
+
+    .btn-verde.cargando .spinner {
+      display: inline-block;
+    }
+
+    .btn-verde.cargando .texto-btn {
+      display: none;
+    }
+
+    @keyframes girar {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Barra de progreso opcional */
+    .barra-progreso {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: #ffffff;
+      width: 0%;
+      transition: width linear;
+    }
+
+    .btn-verde.cargando .barra-progreso {
+      animation: progreso 2s linear forwards;
+    }
+
+    @keyframes progreso {
+      to {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>🍪 Aceptar Cookies</h2>
+    <p>Este sitio web utiliza cookies para mejorar tu experiencia de navegación, analizar el tráfico y personalizar el contenido. Al hacer clic en "Aceptar", consientes el uso de todas las cookies.</p>
+    
+    <button class="btn-verde" onclick="redirigirConDelay(this)" id="btnCookies">
+      <span class="spinner"></span>
+      <span class="texto-btn">Aceptar</span>
+      <span class="barra-progreso"></span>
+    </button>
+  </div>
+
+  <script>
+    // ⬇️ CONFIGURA TU ENLACE AQUÍ
+    const ENLACE_REDIRECCION = "https://tulink.com";
+    
+    // ⬇️ CONFIGURA EL TIEMPO DE ESPERA (en milisegundos)
+    const TIEMPO_ESPERA = 2000; // 2 segundos
+
+    function redirigirConDelay(boton) {
+      // Desactivar botón
+      boton.disabled = true;
+      boton.classList.add('cargando');
+      
+      // Cambiar texto (opcional, el spinner lo reemplaza visualmente)
+      
+      // Redirigir después del delay
+      setTimeout(() => {
+        window.location.href = ENLACE_REDIRECCION;
+      }, TIEMPO_ESPERA);
+    }
+  </script>
+
+</body>
+</html>
